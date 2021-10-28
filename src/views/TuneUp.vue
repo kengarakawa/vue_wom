@@ -1,19 +1,28 @@
 <template>
   <div class="container">
-    <h1 class="text-2xl font-bold text-center">Tune Up Stuff</h1>
-
-    <div class="flex bg-gray-600">
-      <aside class="bg-blue-300">
-        <li>Select Base Toon</li>
-      </aside>
-      <div class="output">Output here</div>
+    <div class="bg-gray-300">
+      <ToonsSelection />
+      
+      <ToonsSelected />
+      
+      <TuneUpResourceOutput />
     </div>
   </div>
 </template>
 
 <script>
+import ToonsSelection from '@/components/ToonSelection.vue'
+import ToonsSelected from '@/components/ToonsSelected.vue'
+import TuneUpResourceOutput from '@/components/TuneUpResourceOutput.vue'
+
+
 export default {
   name: "TuneUp",
+  components : {
+      ToonsSelection ,
+      ToonsSelected ,
+      TuneUpResourceOutput
+  }
 }
 </script>
 
@@ -22,3 +31,4 @@ h1 {
   color: red;
 }
 </style>
+
