@@ -11,23 +11,15 @@ export default createStore({
             
       if( state.selectedToons.find( (t) => t.name == toon.name) == undefined ) {
         
-        
-        // toon.currentTuneUp = 1
-        // toon.preferredTuneUp = 2
-        // state.selectedToons.push( toon )
-        // console.log('pusing toon')
-        // console.log(toon)
         let daToon = toon
-        daToon.currentTuneUp = 1
-        daToon.preferredTuneUp = 2
+        daToon.currentTuneUp = 28
+        daToon.preferredTuneUp = 36
+        daToon.isHidden = false 
         state.selectedToons.push( daToon )
-        console.log('pusing toon')
-        console.log(toon)
-      } else {
-//        console.log("Already there")
-      }
-//      console.log(state.selectedToons)
-      
+      } 
+    } , 
+    removeToon: (state , { name }) => {            
+      state.selectedToons = state.selectedToons.filter( (t) => t.name != name)      
     } , 
     setMinTuneUp( state, { name , minTuneUpValue }) {
       state.selectedToons.forEach( 
@@ -48,6 +40,15 @@ export default createStore({
       )      
     } , 
     
+    toggleHidden(state, { name }) {
+      state.selectedToons.forEach( 
+        (t, i) => {
+          if(t.name == name) {
+            state.selectedToons[i].isHidden = !state.selectedToons[i].isHidden 
+          }
+        }
+      )      
+    } , 
     
   },
   actions: {

@@ -3,9 +3,16 @@
     <div class="bg-gray-300">
       <ToonsSelection />
       
-      <ToonsSelected />
+      <div class="flex">
+        <div class="flex-1">
+          <ToonsSelected />          
+        </div>
+        <div class="flex-auto">
+          <TuneUpResourceOutput />    
+        </div>
       
-      <TuneUpResourceOutput />
+      
+      </div>
     </div>
   </div>
 </template>

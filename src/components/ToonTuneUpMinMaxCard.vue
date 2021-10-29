@@ -2,7 +2,7 @@
     <div class="inline px-3 pb-5 tune-up-min-max-card" :class="{ 'semi' : isHiding }">
         <div class="w-full text-right" >
             <button @click="toggleHiding">  {{ isHiding ? 'Show' : 'Hide' }} </button>&nbsp;&nbsp;
-            <button> Delete </button>
+            <button @click="removeToon"> Delete </button>
         </div>
         
         <h1 class="text-xl font-extrabold text-black">{{ toon.name }}</h1>
@@ -52,9 +52,6 @@ export default {
     created() {
         this.minTuneUp = this.toon.currentTuneUp 
         this.maxTuneUp = this.toon.preferredTuneUp  
-        console.log('created')
-        console.log(this.minTuneUp )
-        console.log(this.maxTuneUp )
     } , 
     data() {
         return {
@@ -64,8 +61,16 @@ export default {
         }
     } ,
     methods: {
+        removeToon() {
+            this.$store.commit('removeToon' , {
+                'name' : this.toon.name 
+            })
+        }, 
         toggleHiding() {
             this.isHiding = !this.isHiding 
+            this.$store.commit('toggleHidden' , {
+                'name' : this.toon.name 
+            })
         } ,
         updateMinTuneUp(event) {
             // this.minTuneUp = event.target.value    
