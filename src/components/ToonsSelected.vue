@@ -1,8 +1,4 @@
 <template>
-    <h1>Toons Selected, here</h1>
-    
-    {{ toons.length }} ??
-    
     
     <div v-for="(toon,index) in toons" :key="index" class="flex">
         <ToonTuneUpMinMaxCard :toon="toon" />

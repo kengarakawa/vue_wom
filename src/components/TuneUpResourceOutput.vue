@@ -9,18 +9,15 @@
 
     
 
-    <ul class="text-left">
-      <li v-for="(value, ui ) in calculateResources(toon)" :key="ui">
-        {{
-          value
-        }}        
-      </li>
-    </ul>
+
     
     
-    <ResourceOutput :toon="toon" :resource="calculateResources(toon)" />
-    
+    <!-- <ResourceOutput :toon="toon" :resource="calculateResources(toon)" /> -->
+    <ResourceOutput :toon="toon" @oncountresource="onCountResource"/>    
   </div>
+  
+  <h1>total {{ output.length}} items</h1>
+  <button @click="log">Output Log</button>
 
 </template>
 
@@ -29,10 +26,13 @@ import tuneUps from "@/assets/tuneups.json"
 import ResourceOutput from "@/components/ResourceOutput"
 export default {
   name: "TuneUpResourceOutput",
+  emits : ['oncountresource'], 
   data() {
     return {
       resources: [],
       tuneUps: [],
+      
+      output :[] , 
     //  toons: [],
     }
   },
@@ -57,21 +57,27 @@ export default {
 
     this.tuneUps = tuneUps.tuneups
     // this.toons = this.$store.state.selectedToons
-  },
-  updated() {
-    console.log(" UPDATED ")
-    //    this.resources = []
-
-    //    this.toons.map( t =>
-    //    this.resources.push(this.calculateResources(t)) )
-
-    //    console.log(this.resources)
     
-    // this.toons = this.$store.state.selectedToons
-    // console.log(`now toons contains ${this.toons.length} items`)
+    let size = this.$store.state.selectedToons;
+    this.output = []
+    for(let i=0; i<size;i++) {
+        this.output.push({})
+    }
   },
+
 
   methods: {
+      
+    onCountResource(out) {
+        console.log('HERERERERE ... returning from emit, getting ')
+        console.log(out)
+      this.output.push(out)   
+    } , 
+      
+    log() {
+        console.log(this.output) 
+    } , 
+    
       
     getRegionalMaterialName(region)   {
         region = region.toLowerCase()

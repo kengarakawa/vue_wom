@@ -12,8 +12,8 @@ export default createStore({
       if( state.selectedToons.find( (t) => t.name == toon.name) == undefined ) {
         
         let daToon = toon
-        daToon.currentTuneUp = 28
-        daToon.preferredTuneUp = 36
+        daToon.currentTuneUp = 1
+        daToon.preferredTuneUp = 10
         daToon.isHidden = false 
         state.selectedToons.push( daToon )
       } 

@@ -12,8 +12,8 @@
         </div>
         
         <div>
-            <p>Current Level : <input type="number" name="min" min="1" max="34" v-model="minTuneUp" @change="updateMinTuneUp($event)"> </p>
-            <p>Target Level : <input type="number" name="min" min="2" max="35" v-model="maxTuneUp" @change="updateMaxTuneUp($event)"> </p>
+            <p>Current Level : <input type="number" name="min" min="1" max="34" v-model.number="minTuneUp" @change="updateMinTuneUp($event)"> </p>
+            <p>Target Level : <input type="number" name="min" min="2" max="35" v-model.number="maxTuneUp" @change="updateMaxTuneUp($event)"> </p>
         </div>            
         
         
@@ -76,13 +76,13 @@ export default {
             // this.minTuneUp = event.target.value    
             this.$store.commit('setMinTuneUp' , {
                 'name' : this.toon.name , 
-                'minTuneUpValue' : event.target.value                 
+                'minTuneUpValue' : parseInt(event.target.value)
             })
         } , 
         updateMaxTuneUp(event) {
             this.$store.commit('setMaxTuneUp' , {
                 'name' : this.toon.name , 
-                'maxTuneUpValue' : event.target.value                 
+                'maxTuneUpValue' : parseInt(event.target.value)
             })
         }
     },
