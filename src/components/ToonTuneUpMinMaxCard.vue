@@ -12,8 +12,8 @@
         </div>
         
         <div>
-            <p>Current Level : <input type="number" name="min" min="1" max="34" v-model.number="minTuneUp" @change="updateMinTuneUp($event)"> </p>
-            <p>Target Level : <input type="number" name="min" min="2" max="35" v-model.number="maxTuneUp" @change="updateMaxTuneUp($event)"> </p>
+            <p>Current Level : <input type="number" name="min" min="1" max="44" v-model.number="minTuneUp" @change="updateMinTuneUp($event)"> </p>
+            <p>Target Level : <input type="number" name="min" min="2" max="45" v-model.number="maxTuneUp" @change="updateMaxTuneUp($event)"> </p>
         </div>            
         
         

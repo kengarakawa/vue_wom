@@ -3,74 +3,85 @@
     <h3>Resource Output</h3>
     <div>
         {{ toon }}      
-      {{ temp }}
-  </div
-    >
+      {{ tempx }}
+  </div>
+
+
 
     <table class="w-full tu-resources" cellspacing="0" cellpadding="3" border="1">
       <tr>
-        <th rowspan="2">Golds</th>
-        <th colspan="2">Anvils</th>
-        <th colspan="3">Dynamites</th>
-        <th colspan="2">Boosters</th>
-        <th rowspan="2">Regional Mat.</th>
-        <th rowspan="2">Special Mat.</th>
-        <th rowspan="2">Secret Stuff</th>
-        <th rowspan="2">Formulars</th>
-        <th rowspan="2">Atoms</th>
+        <th rowspan="2" class="border border-black">Golds</th>
+        <th colspan="2" class="border border-black">Anvils</th>
+        <th colspan="3" class="border border-black">Dynamites</th>
+        <th colspan="2" class="border border-black">Boosters</th>
+        <th colspan="3" class="border border-black">Regional Mat.</th>
+        <th rowspan="2" class="border border-black">Special Mat.</th>
+        <th rowspan="2" class="border border-black">Secret Stuff</th>
+        <th rowspan="2" class="border border-black">Formulars</th>
+        <th rowspan="2" class="border border-black">Atoms</th>
       </tr>
       <tr>
-        <th>Common</th>
-        <th>Fine</th>
+        <th class="border border-black">Common</th>
+        <th class="border border-black">Fine</th>
         
-        <th>Common</th>
-        <th>Fine</th>
-        <th>Superior</th>        
+        <th class="border border-black">Common</th>
+        <th class="border border-black">Fine</th>
+        <th class="border border-black">Superior</th>        
         
-        <th>Common</th>
-        <th>Fine</th>
+        <th class="border border-black">Common</th>
+        <th class="border border-black">Fine</th>
+        
+        <th class="border border-black">Common</th>
+        <th class="border border-black">Fine</th>
+        <th class="border border-black">Superior</th>        
       </tr>
 
       <tr>
-        <td>{{ temp["gold"] || empty_symbol }} </td>
-        <td>
+        <td class="border border-black">{{ temp["gold"] || empty_symbol }} </td>
+        <td class="border border-black">
           {{ temp["AV_common_anvil"] || empty_symbol }}
         </td>
-        <td>
+        <td class="border border-black">
           {{ temp["AV_fine_anvil"] || empty_symbol }}
         </td>
         
-        <td>
+        <td class="border border-black">
             {{ temp["DY_common_dynamite"] || empty_symbol}}
         </td>
-        <td>
+        <td class="border border-black">
             {{ temp["DY_fine_dynamite"] || empty_symbol}}
         </td>
-        <td>
+        <td class="border border-black">
             {{ temp["DY_superior_dynamite"] || empty_symbol}}
         </td>
         
-        <td>
-            {{ commonBooster(temp) }}
+        <td class="border border-black">            
+            <span v-html="commonBooster(temp)"></span>
         </td>
-        <td>
-            {{ fineBooster(temp) }}
+        <td class="border border-black">
+            <span v-html="fineBooster(temp)"></span>
         </td>
-        <td>
-            {{ regionalMaterial(temp) }}
+        <td class="border border-black">            
+            <span v-html="regionalMaterial(temp , 'common')"></span>
         </td>
-        <td>
+        <td class="border border-black">
+            <span v-html="regionalMaterial(temp , 'fine')"></span>
+        </td>
+        <td class="border border-black">
+            <span v-html="regionalMaterial(temp , 'superior')"></span>
+        </td>
+        <td class="border border-black">
             {{ specialMaterial(temp) }}
         </td>
         
-        <td>
+        <td class="border border-black">
             {{ temp["secret_stuff"] || empty_symbol}}
         </td>
         
-        <td>
+        <td class="border border-black">
             {{ formular(temp) }}
         </td>
-        <td>
+        <td class="border border-black">
             {{ atom(temp) }}
         </td>
       </tr>
@@ -81,20 +92,10 @@
   <button @click="countResources">RECOUNT RESOURCES</button>
 </template>
 
-<style scoped>
-    .tu-resources {
-        border: solid 1px #000000
-    }
-    table.tu-resources th{
-        font-size:14px        
-    }
-    table.tu-resources td{
-        font-size:12px        
-    }
-</style>
 
 <script>
 import tuneUps from "@/assets/tuneups.json"
+import { getResourceIcon } from "@/services/tuneUpHelper.js"
 import {
   getRegionalMaterialName,
   getSpecialMaterialName,
@@ -118,7 +119,9 @@ export default {
   },
   
   computed: {
-     
+     tempx()  {
+         return this.countResources()
+     }
   }, 
   data() {
     return {
@@ -133,17 +136,21 @@ export default {
   },
   updated() {
       
-      console.log('Being called')
+      
 
   }, 
   methods: {
+      _icon(resourceCode) {
+          return getResourceIcon(resourceCode)
+          
+      },
       commonBooster(res) {
          let out = []
          
          for( let key in res) {
              if(key.indexOf('BO_') >= 0 && key.indexOf('BO_fine') < 0) {
                  out.push(
-                     `${res[key]} - ${key}`
+                     `${res[key]} ` + getResourceIcon(key)
                  )
              }
          }         
@@ -152,9 +159,9 @@ export default {
       fineBooster(res) {
          let out = []         
          for( let key in res) {
-             if(key.indexOf('BO_fine') >= 0) {
-                 out.push(
-                     `${res[key]} - ${key}`
+             if(key.indexOf('BO_fine') >= 0) {                                 
+                 out.push(                     
+                     `${res[key]} ` + getResourceIcon(key)
                  )
              }
          }         
@@ -194,12 +201,12 @@ export default {
          return out.length > 0 ? out.join(" ") : this.empty_symbol 
      } ,      
      
-     regionalMaterial(res) {
+     regionalMaterial(res , rarity) {
          let out = []         
          for( let key in res) {
-             if(key.indexOf('RG_') >= 0) {
+             if(key.indexOf('RG_') >= 0 && key.indexOf(rarity) >= 0) {
                  out.push(
-                     `${res[key]} - ${key}`
+                     `${res[key]} ` + getResourceIcon(key)
                  )
              }
          }         
@@ -298,9 +305,31 @@ export default {
 
       this.temp = resources
 
-      this.$emit("oncountresource", resources)
-      console.log("emitted")
+    //   this.$emit("oncountresource", resources)
+    //   console.log("emitted")
     },
   },
 }
 </script>
+
+
+
+<style >
+    .tu-resources {
+        border: solid 1px #000000; 
+        border-collapse: collapse;
+        
+        text-align:center;
+    }
+    table.tu-resources th{
+        font-size:14px        
+    }
+    table.tu-resources td{
+        font-size:12px        
+    }
+    
+    .icon {
+        width: 30px;
+        height:30px;
+    }
+</style>

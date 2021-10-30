@@ -39,17 +39,21 @@ module.exports = {
         return type
     }
   },
-  
+
   getFormularName: (rarity) => {
-    switch(rarity.toLowerCase()) {
-      case 'common'  : return 'beta'
-      case 'rare'  : return 'alpha'
-      case 'epic'  : return 'omega'
-      case 'legendary'  : return 'infinity'
-      default : return ''
+    switch (rarity.toLowerCase()) {
+      case "common":
+        return "beta"
+      case "rare":
+        return "alpha"
+      case "epic":
+        return "omega"
+      case "legendary":
+        return "infinity"
+      default:
+        return ""
     }
-    
-  } , 
+  },
 
   getSpecialMaterialName: (toonBase, itemName) => {
     switch (toonBase.toLowerCase()) {
@@ -137,5 +141,122 @@ module.exports = {
       default:
         return itemName
     }
+  },
+
+  getResourceIcon(resourceCode) {
+    let img = ""
+    switch (resourceCode) {
+      case "BO_attacker_booster":
+        img = "attacker_booster.webp"
+        break
+      case "BO_defender_booster":
+        img = "defender_booster.webp"
+        break
+      case "BO_support_booster":
+        img = "support_booster.webp"
+        break
+      case "BO_fine_attacker_booster":
+        img = "fine_attacker_booster.webp"
+        break
+      case "BO_fine_defender_booster":
+        img = "fine_defender_booster.webp"
+        break
+      case "BO_fine_support_booster":
+        img = "fine_support_booster.webp"
+        break
+      case "RG_common_dry_leaf":
+        img = "dry_leaf.webp"
+        break
+      case "RG_common_hydrant":
+        img = "hydrant.webp"
+        break
+      case "RG_common_bucket_of_milk":
+        img = "bucket_of_milk.webp"
+        break
+      case "RG_common_dried_skull":
+        img = "dried_skull.webp"
+        break
+      case "RG_common_traffic_light":
+        img = "traffic_light.webp"
+        break
+      case "RG_common_evaporator":
+        img = "evaporator.webp"
+        break
+      case "RG_common_mittens":
+        img = "mittens.webp"
+        break
+      case "RG_common_flower_crown":
+        img = "flower_crown.webp"
+        break
+      case "RG_common_movie_camera":
+        img = "movie_camera.webp"
+        break
+        case "RG_common_skull":
+          img = "skull.webp"
+          break        
+        case "RG_fine_dry_leaf":
+          img = "fine_dry_leaf.webp"
+          break
+        case "RG_fine_hydrant":
+          img = "fine_hydrant.webp"
+          break
+        case "RG_fine_bucket_of_milk":
+          img = "fine_bucket_of_milk.webp"
+          break
+        case "RG_fine_dried_skull":
+          img = "fine_dried_skull.webp"
+          break
+        case "RG_fine_traffic_light":
+          img = "fine_traffic_light.webp"
+          break
+        case "RG_fine_evaporator":
+          img = "fine_evaporator.webp"
+          break
+        case "RG_fine_mittens":
+          img = "fine_mittens.webp"
+          break
+        case "RG_fine_flower_crown":
+          img = "fine_flower_crown.webp"
+          break
+        case "RG_fine_movie_camera":
+          img = "fine_movie_camera.webp"
+          break        
+          case "RG_fine_skull":
+            img = "fine_skull.webp"
+            break                  
+          case "RG_superior_dry_leaf":
+            img = "superior_dry_leaf.webp"
+            break
+          case "RG_superior_hydrant":
+            img = "superior_hydrant.webp"
+            break
+          case "RG_superior_bucket_of_milk":
+            img = "superior_bucket_of_milk.webp"
+            break
+          case "RG_superior_dried_skull":
+            img = "superior_dried_skull.webp"
+            break
+          case "RG_superior_traffic_light":
+            img = "superior_traffic_light.webp"
+            break
+          case "RG_superior_evaporator":
+            img = "superior_evaporator.webp"
+            break
+          case "RG_superior_mittens":
+            img = "superior_mittens.webp"
+            break
+          case "RG_superior_flower_crown":
+            img = "superior_flower_crown.webp"
+            break
+          case "RG_superior_movie_camera":
+            img = "superior_movie_camera.webp"
+            break       
+            case "RG_superior_skull":
+          img = "superior_skull.webp"
+          break           
+      default:
+        return resourceCode
+    }
+    return `<img  src="assets/resources/${img}" class="icon" />`
   },
 }
